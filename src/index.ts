@@ -71,6 +71,15 @@ export interface Bucketeer {
    * @returns The variation value returned from server or default value.
    */
   track(user: User, goalId: string, value?: number): void;
+
+  /**
+   * Tracks a goal event.
+   * @param user - User information.
+   * @param featureId - The feature flag ID to use.
+   * @returns {Evaluation|null} The evaluation details returned from the server. Returns `null` if the `featureId` is not found.
+   */
+  evaluationDetails(user: User, featureId: string): Promise<Evaluation | null>;
+
   /**
    * destroy finalizes Bucketeer instance.
    * It sends all event in memory and stop workers.
@@ -114,6 +123,9 @@ export class BKTClientImpl implements Bucketeer {
         this.callRegisterEvents(this.eventStore.takeout(this.eventStore.size()));
       }
     }, this.config.pollingIntervalForRegisterEvents!);
+  }
+  evaluationDetails(user: User, featureId: string): Promise<Evaluation | null> {
+    throw new Error('Method not implemented.');
   }
 
   registerEvents(): void {
