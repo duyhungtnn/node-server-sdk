@@ -1,5 +1,5 @@
 import { User } from './objects/user';
-import { EventStore } from './stores/EventStore';
+import { EventStore } from './stores/eventStore';
 import { createSchedule, removeSchedule } from './schedule';
 import { GIT_REVISION } from './shared';
 import { APIClient } from './api/client';
@@ -285,6 +285,34 @@ export class BKTClientImpl implements Bucketeer {
   }
 
   async getEvaluation(user: User, featureId: string): Promise<Evaluation | null> {
+    if (this.config.enableLocalEvaluation === true) {
+      return this.getEvaluationLocally(user, featureId);
+    }
+    return this.getEvaluationRemotely(user, featureId);
+  }
+
+  async getEvaluationLocally(user: User, featureId: string): Promise<Evaluation | null> {
+    const startTime: number = Date.now();
+    let res: GetEvaluationResponse;
+    let size: number;
+    try {
+      [res, size] = await this.apiClient.getEvaluation(this.config.tag, user, featureId);
+    } catch (error) {
+      this.saveErrorMetricsEvent(this.config.tag, error, ApiId.GET_EVALUATION);
+      return null;
+    }
+    const evaluation = res?.evaluation;
+    if (evaluation == null) {
+      const error = Error('Fail to get evaluation. Reason: null response.');
+      this.saveErrorMetricsEvent(this.config.tag, error, ApiId.GET_EVALUATION);
+      return null;
+    }
+    const second = (Date.now() - startTime) / 1000;
+    this.saveEvaluationMetricsEvent(this.config.tag, second, size);
+    return evaluation;
+  }
+
+  async getEvaluationRemotely(user: User, featureId: string): Promise<Evaluation | null> {
     const startTime: number = Date.now();
     let res: GetEvaluationResponse;
     let size: number;

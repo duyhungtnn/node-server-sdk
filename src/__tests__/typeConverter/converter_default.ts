@@ -1,5 +1,5 @@
 import test from 'ava';
-import { defaultStringToTypeConverter } from '../converter';
+import { defaultStringToTypeConverter } from '../../converter';
 
 type StringConvertTestCase = {
   input: string;

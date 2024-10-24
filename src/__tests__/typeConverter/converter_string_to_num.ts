@@ -1,5 +1,5 @@
 import test from 'ava';
-import { stringToBoolConverter, stringToNumberConverter } from '../converter';
+import { stringToBoolConverter, stringToNumberConverter } from '../../converter';
 
 type StringToNumConvertTestCase = {
   input: string;

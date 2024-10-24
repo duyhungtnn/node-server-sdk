@@ -1,6 +1,6 @@
 import test from 'ava';
-import { stringToObjectConverter } from '../converter';
-import { BKTValue } from '../types';
+import { stringToObjectConverter } from '../../converter';
+import { BKTValue } from '../../types';
 
 type StringToJSonValueConvertTestCase = {
   input: string;
