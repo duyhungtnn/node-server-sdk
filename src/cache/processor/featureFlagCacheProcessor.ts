@@ -1,10 +1,10 @@
-import { FeaturesCache } from '../cache/features';
-import { Cache } from '../cache/cache';
-import { GRPCClient } from '../grpc/client';
+import { FeaturesCache } from '../features';
+import { Cache } from '../cache';
+import { GRPCClient } from '../../grpc/client';
 import { ProcessorEventsEmitter } from './processorEvents';
-import { createSchedule, removeSchedule } from '../schedule';
+import { createSchedule, removeSchedule } from '../../schedule';
 import { Feature } from '@bucketeer/node-evaluation';
-import { ApiId } from '../objects/apiId';
+import { ApiId } from '../../objects/apiId';
 
 interface FeatureFlagProcessor {
   start(): void;

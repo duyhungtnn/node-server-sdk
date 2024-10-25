@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { NodeApiIds } from '../objects/apiId';
+import { NodeApiIds } from '../../objects/apiId';
 
 // Define event types with specific data types.
 interface ProcessorEvents {
