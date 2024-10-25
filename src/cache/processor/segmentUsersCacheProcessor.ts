@@ -18,7 +18,7 @@ type SegementUsersCacheProcessorOptions = {
   grpc: GRPCClient;
   eventEmitter: ProcessorEventsEmitter;
   version: string;
-  featureFlagTag: string;
+  featureTag: string;
 };
 
 const SEGEMENT_USERS_REQUESTED_AT = 'bucketeer_segment_users_requested_at';
@@ -37,7 +37,6 @@ class DefaultSegementUserCacheProcessor implements SegementUsersCacheProcessor {
   private grpc: GRPCClient;
   private eventEmitter: ProcessorEventsEmitter;
   private version: string;
-  private featureFlagTag: string;
   private pollingScheduleID?: NodeJS.Timeout;
 
   constructor(options: SegementUsersCacheProcessorOptions) {
@@ -47,7 +46,6 @@ class DefaultSegementUserCacheProcessor implements SegementUsersCacheProcessor {
     this.grpc = options.grpc;
     this.eventEmitter = options.eventEmitter;
     this.version = options.version;
-    this.featureFlagTag = options.featureFlagTag;
   }
 
   start() {
@@ -136,3 +134,5 @@ class DefaultSegementUserCacheProcessor implements SegementUsersCacheProcessor {
     this.eventEmitter.emit('pushSizeMetricsEvent', { size: size, apiId: ApiId.GET_SEGMENT_USERS });
   }
 }
+
+export { SegementUsersCacheProcessor, NewSegementUserCacheProcessor, SEGEMENT_USERS_CACHE_TTL };

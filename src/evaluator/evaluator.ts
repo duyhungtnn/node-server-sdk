@@ -3,8 +3,8 @@ import {
   Evaluator,
   Feature,
   SegmentUser,
-  SegmentUsers,
 } from '@bucketeer/node-evaluation';
+
 import { FeaturesCache } from '../cache/features';
 import { SegmentUsersCache } from '../cache/segementUsers';
 import { Evaluation } from '../objects/evaluation';

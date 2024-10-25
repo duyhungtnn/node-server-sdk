@@ -17,9 +17,8 @@ type FeatureFlagProcessorOptions = {
   pollingInterval: number;
   grpc: GRPCClient;
   eventEmitter: ProcessorEventsEmitter;
-  cachePollingInterval: number;
   version: string;
-  featureFlagTag: string;
+  featureTag: string;
 };
 
 function NewFeatureFlagProcessor(options: FeatureFlagProcessorOptions): FeatureFlagProcessor {
@@ -38,16 +37,16 @@ class DefaultFeatureFlagProcessor implements FeatureFlagProcessor {
   private pollingScheduleID?: NodeJS.Timeout;
   private pollingInterval: number;
   private version: string;
-  featureFlagTag: string;
+  featureTag: string;
 
   constructor(options: FeatureFlagProcessorOptions) {
     this.featureFlagCache = options.featureFlagCache;
     this.cache = options.cache;
     this.grpc = options.grpc;
     this.eventEmitter = options.eventEmitter;
-    this.pollingInterval = options.cachePollingInterval;
+    this.pollingInterval = options.pollingInterval;
     this.version = options.version;
-    this.featureFlagTag = options.featureFlagTag;
+    this.featureTag = options.featureTag;
   }
 
   start() {
@@ -73,7 +72,7 @@ class DefaultFeatureFlagProcessor implements FeatureFlagProcessor {
     const featureFlags = await this.grpc.getFeatureFlags({
       requestedAt: requestedAt,
       version: this.version,
-      tag: this.featureFlagTag,
+      tag: this.featureTag,
       featureFlagsId: featureFlagsId,
     });
     const latency = (Date.now() - startTime) / 1000;
@@ -151,4 +150,4 @@ class DefaultFeatureFlagProcessor implements FeatureFlagProcessor {
   }
 }
 
-export { FeatureFlagProcessor };
+export { FeatureFlagProcessor, NewFeatureFlagProcessor, FEATURE_FLAG_CACHE_TTL };
