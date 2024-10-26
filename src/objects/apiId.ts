@@ -10,4 +10,9 @@ export enum ApiId {
   SDK_GET_VARIATION = 100,
 }
 
-export type NodeApiIds = ApiId.GET_EVALUATION | ApiId.REGISTER_EVENTS | ApiId.GET_FEATURE_FLAGS | ApiId.GET_SEGMENT_USERS;
+export type NodeApiIds =
+  | ApiId.GET_EVALUATION
+  | ApiId.REGISTER_EVENTS
+  | ApiId.GET_FEATURE_FLAGS
+  | ApiId.GET_SEGMENT_USERS
+  | ApiId.SDK_GET_VARIATION;
