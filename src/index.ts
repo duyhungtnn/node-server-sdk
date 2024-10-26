@@ -376,14 +376,17 @@ export class BKTClientImpl implements Bucketeer {
   }
 
   async getEvaluationRemotely(user: User, featureId: string): Promise<Evaluation | null> {
+    const startTime: number = Date.now();
+    let evaluation: Evaluation | null;
     try {
-      const evaluation = await this.localEvaluator.evaluate(user, featureId);
-      return evaluation;
+      evaluation = await this.localEvaluator.evaluate(user, featureId);
     } catch (error) {
-      this.saveErrorMetricsEvent(this.config.tag, error, ApiId.GET_EVALUATION);
+      evaluation = null;
+      this.saveErrorMetricsEvent(this.config.tag, error, ApiId.SDK_GET_VARIATION);
     }
-
-    return null;
+    const second = (Date.now() - startTime) / 1000;
+    this.saveLatencyMetricsEvent(this.config.tag, second, ApiId.SDK_GET_VARIATION);
+    return evaluation;
   }
 
   async getVariationDetails<T extends BKTValue>(
