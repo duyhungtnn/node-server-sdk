@@ -137,7 +137,7 @@ class DefaultFeatureFlagProcessor implements FeatureFlagProcessor {
   async pushLatencyMetricsEvent(latency: number) {
     this.eventEmitter.emit('pushLatencyMetricsEvent', {
       latency: latency,
-      apiId: ApiId.GET_EVALUATION,
+      apiId: ApiId.GET_FEATURE_FLAGS,
     });
   }
 

@@ -4,10 +4,10 @@ import {
   GetFeatureFlagsResponse,
   GetSegmentUsersRequest,
   GetSegmentUsersResponse,
-  SourceId,
 } from '@bucketeer/node-evaluation';
 import { grpc } from '@improbable-eng/grpc-web';
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
+import { SourceId } from '../objects/sourceId';
 
 class GRPCClient {
   private readonly apiKey: string;

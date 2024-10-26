@@ -1,4 +1,3 @@
-// Simple cache that only return one kind of value
 interface Cache {
   get(key: string): Promise<any | null>;
   put(key: string, value: any, ttl: number): Promise<void>;
