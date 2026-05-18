@@ -4,11 +4,11 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bucketeer-io/node-server-sdk.git"
+    "url": "git+https://github.com/duyhungtnn/node-server-sdk.git"
   },
-  "homepage": "https://github.com/bucketeer-io/node-server-sdk#readme",
+  "homepage": "https://github.com/duyhungtnn/node-server-sdk#readme",
   "bugs": {
-    "url": "https://github.com/bucketeer-io/node-server-sdk/issues"
+    "url": "https://github.com/duyhungtnn/node-server-sdk/issues"
   },
   "publishConfig": {
     "access": "public"
